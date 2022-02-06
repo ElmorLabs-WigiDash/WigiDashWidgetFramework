@@ -1,5 +1,4 @@
-﻿using FrontierWidgetFramework.GridUtility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -22,19 +21,12 @@ namespace FrontierWidgetFramework.WidgetUtility
         public int Duration;
     }
 
-    public enum WidgetSize : int
-    {
-        SIZE_1X1, SIZE_1X2, SIZE_1X3, SIZE_1X4, SIZE_2X1, SIZE_2X2, SIZE_2X3, SIZE_2X4, SIZE_3X1, SIZE_3X2, SIZE_3X3, SIZE_3X4, SIZE_4X1, SIZE_4X2, SIZE_4X3, SIZE_4X4, SIZE_5X1, SIZE_5X2, SIZE_5X3, SIZE_5X4
-    }
-
     public enum WidgetError : int
     {
         // Clear
         NO_ERROR,
 
         // SDK Version Errors
-        SDK_VERSION_TOO_HIGH,
-        SDK_VERSION_TOO_LOW,
         SDK_VERSION_NOT_SUPPORTED,
 
         // Manager Error
@@ -50,107 +42,61 @@ namespace FrontierWidgetFramework.WidgetUtility
         Version_0, // ALPHA
     }
 
-    public static class Extensions
+    // Widget Size & Position Classes
+    public class WidgetBaseUnit
     {
-        private const int base_width = 200;
-        private const int base_height = 145;
-        private const int offset_x = 4;
-        private const int offset_y = 4;
+        public const int Width = 204;
+        public const int Height = 149;
+        public const int OffsetX = 4;
+        public const int OffsetY = 4;
+    }
 
-        public static Size ToSize(this WidgetSize widgetSize)
+    public class WidgetSize
+    {
+        public int Width { get; set; }
+        public int Height { get; set; }
+
+        public WidgetSize() { }
+        public WidgetSize(int width, int height)
         {
-            switch (widgetSize)
-            {
-                case WidgetSize.SIZE_1X1:
-                    return new Size(base_width, base_height);
-                case WidgetSize.SIZE_1X2:
-                    return new Size(base_width, base_height * 2 + offset_y);
-                case WidgetSize.SIZE_1X3:
-                    return new Size(base_width, base_height * 3 + offset_y * 2);
-                case WidgetSize.SIZE_1X4:
-                    return new Size(base_width, base_height * 4 + offset_y * 3);
-                case WidgetSize.SIZE_2X1:
-                    return new Size(base_width * 2 + offset_x, base_height);
-                case WidgetSize.SIZE_2X2:
-                    return new Size(base_width * 2 + offset_x, base_height * 2 + offset_y);
-                case WidgetSize.SIZE_2X3:
-                    return new Size(base_width * 2 + offset_x, base_height * 3 + offset_y * 2);
-                case WidgetSize.SIZE_2X4:
-                    return new Size(base_width * 2 + offset_x, base_height * 4 + offset_y * 3);
-                case WidgetSize.SIZE_3X1:
-                    return new Size(base_width * 3 + offset_x * 2, base_height);
-                case WidgetSize.SIZE_3X2:
-                    return new Size(base_width * 3 + offset_x * 2, base_height * 2 + offset_y);
-                case WidgetSize.SIZE_3X3:
-                    return new Size(base_width * 3 + offset_x * 2, base_height * 3 + offset_y * 2);
-                case WidgetSize.SIZE_3X4:
-                    return new Size(base_width * 3 + offset_x * 2, base_height * 4 + offset_y * 3);
-                case WidgetSize.SIZE_4X1:
-                    return new Size(base_width * 4 + offset_x * 3, base_height);
-                case WidgetSize.SIZE_4X2:
-                    return new Size(base_width * 4 + offset_x * 3, base_height * 2 + offset_y);
-                case WidgetSize.SIZE_4X3:
-                    return new Size(base_width * 4 + offset_x * 3, base_height * 3 + offset_y * 2);
-                case WidgetSize.SIZE_4X4:
-                    return new Size(base_width * 4 + offset_x * 3, base_height * 4 + offset_y * 3);
-                case WidgetSize.SIZE_5X1:
-                    return new Size(base_width * 5 + offset_x * 4, base_height);
-                case WidgetSize.SIZE_5X2:
-                    return new Size(base_width * 5 + offset_x * 4, base_height * 2 + offset_y);
-                case WidgetSize.SIZE_5X3:
-                    return new Size(base_width * 5 + offset_x * 4, base_height * 3 + offset_y * 2);
-                case WidgetSize.SIZE_5X4:
-                    return new Size(base_width * 5 + offset_x * 4, base_height * 4 + offset_y * 3);
-            }
-            throw new NotImplementedException();
+            Width = width;
+            Height = height;
         }
 
-        public static GridSize ToGridSize(this WidgetSize widgetSize)
+        public override string ToString()
         {
-            switch (widgetSize)
-            {
-                case WidgetSize.SIZE_1X1:
-                    return new GridSize(1, 1);
-                case WidgetSize.SIZE_1X2:
-                    return new GridSize(1, 2);
-                case WidgetSize.SIZE_1X3:
-                    return new GridSize(1, 3);
-                case WidgetSize.SIZE_1X4:
-                    return new GridSize(1, 4);
-                case WidgetSize.SIZE_2X1:
-                    return new GridSize(2, 1);
-                case WidgetSize.SIZE_2X2:
-                    return new GridSize(2, 2);
-                case WidgetSize.SIZE_2X3:
-                    return new GridSize(2, 3);
-                case WidgetSize.SIZE_2X4:
-                    return new GridSize(2, 4);
-                case WidgetSize.SIZE_3X1:
-                    return new GridSize(3, 1);
-                case WidgetSize.SIZE_3X2:
-                    return new GridSize(3, 2);
-                case WidgetSize.SIZE_3X3:
-                    return new GridSize(3, 3);
-                case WidgetSize.SIZE_3X4:
-                    return new GridSize(3, 4);
-                case WidgetSize.SIZE_4X1:
-                    return new GridSize(4, 1);
-                case WidgetSize.SIZE_4X2:
-                    return new GridSize(4, 2);
-                case WidgetSize.SIZE_4X3:
-                    return new GridSize(4, 3);
-                case WidgetSize.SIZE_4X4:
-                    return new GridSize(4, 4);
-                case WidgetSize.SIZE_5X1:
-                    return new GridSize(5, 1);
-                case WidgetSize.SIZE_5X2:
-                    return new GridSize(5, 2);
-                case WidgetSize.SIZE_5X3:
-                    return new GridSize(5, 3);
-                case WidgetSize.SIZE_5X4:
-                    return new GridSize(5, 4);
-            }
-            throw new NotImplementedException();
+            return Width.ToString() + "x" + Height.ToString();
+        }
+
+        public Size ToSize()
+        {
+            return new Size(Width * WidgetBaseUnit.Width - WidgetBaseUnit.OffsetX, Height * WidgetBaseUnit.Height - WidgetBaseUnit.OffsetY);
+        }
+    }
+
+    // Utility Functions
+    public static class WidgetUtility
+    {
+        public static Color ColorTo16bit(Color color)
+        {
+
+            int red = (color.R * 31 / 255) * 255 / 31;
+            int green = (color.G * 63 / 255) * 255 / 63;
+            int blue = (color.B * 31 / 255) * 255 / 31;
+
+            return Color.FromArgb(red, green, blue);
+        }
+        public static Color ColorFromRgb565(UInt16 clr16bit)
+        {
+            int r = (clr16bit >> 11) << 3; // 5-bit
+            int g = ((clr16bit >> 5) & 0x3F) << 2; // 6-bit
+            int b = (clr16bit & 0x1F) << 3; // 5-bit
+            return Color.FromArgb(r, g, b);
+        }
+
+        public static UInt16 ColorToRgb565(Color color)
+        {
+            return (UInt16)(((color.R >> 3) << 11) | ((color.G >> 2) << 5) | ((color.B >> 3)));
         }
     }
 }

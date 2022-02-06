@@ -1,5 +1,4 @@
-﻿using FrontierWidgetFramework.GridUtility;
-using FrontierWidgetFramework.WidgetUtility;
+﻿using FrontierWidgetFramework.WidgetUtility;
 using System;
 using System.Collections.Generic;
 using System.Linq;

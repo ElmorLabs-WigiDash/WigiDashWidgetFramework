@@ -1,5 +1,4 @@
-﻿using FrontierWidgetFramework.GridUtility;
-using FrontierWidgetFramework.WidgetUtility;
+﻿using FrontierWidgetFramework.WidgetUtility;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,8 +10,7 @@ namespace FrontierWidgetFramework
         // Definition
         public IWidgetObject WidgetObject { get; }
         public Guid InstanceGuid { get; }
-        public GridSize GridSize { get; }
-        public GridPosition GridPosition { get; }
+        public WidgetSize WidgetSize { get; }
         public List<InstanceSetting> InstanceSettings { get; set; }
 
         // Events
