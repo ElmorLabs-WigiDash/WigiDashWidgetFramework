@@ -8,15 +8,10 @@ using System.Threading.Tasks;
 
 namespace FrontierWidgetFramework
 {
-    public interface IWidgetObject
+    public interface IWidgetObject : IWidgetBase
     {
         // Definition
-        public Guid Guid { get; }
-        public string Name { get; }
         public string Description { get; }
-        public string Author { get; }
-        public string Website { get; }
-        public Version Version { get; }
         public List<WidgetSize> SupportedSizes { get; }
 
         // Function

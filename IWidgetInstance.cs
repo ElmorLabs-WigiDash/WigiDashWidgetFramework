@@ -9,7 +9,7 @@ namespace FrontierWidgetFramework
     {
         // Definition
         public IWidgetObject WidgetObject { get; }
-        public Guid InstanceGuid { get; }
+        public Guid Guid { get; }
         public WidgetSize WidgetSize { get; }
         public List<InstanceSetting> InstanceSettings { get; set; }
 
@@ -17,12 +17,12 @@ namespace FrontierWidgetFramework
         event WidgetUpdatedEventHandler WidgetUpdated;
 
         // Functionality
-        void RequestUpdate();
-        void ClickEvent(ClickType click_type, int x, int y);
-        void ShowSettings();
-        void Dispose();
-        void EnterSleep();
-        void ExitSleep();
+        public void RequestUpdate();
+        public void ClickEvent(ClickType click_type, int x, int y);
+        public void ShowSettings();
+        public void Dispose();
+        public void EnterSleep();
+        public void ExitSleep();
     }
     public class WidgetUpdatedEventArgs : EventArgs
     {
