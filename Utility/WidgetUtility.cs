@@ -40,6 +40,7 @@ namespace FrontierWidgetFramework.WidgetUtility
     public enum SdkVersion : int
     {
         Version_0, // ALPHA
+        Version_1, // BETA
     }
 
     // Widget Size & Position Classes
