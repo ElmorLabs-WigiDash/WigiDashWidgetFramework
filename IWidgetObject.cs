@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FrontierWidgetFramework
 {
@@ -23,6 +20,6 @@ namespace FrontierWidgetFramework
         // Error Handling
         WidgetError Load(string ResourcePath);
         WidgetError Unload();
-        public string LastErrorMessage { get; set;  }
+        public string LastErrorMessage { get; set; }
     }
 }

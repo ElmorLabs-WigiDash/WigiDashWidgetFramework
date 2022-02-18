@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FrontierWidgetFramework.WidgetUtility
 {
@@ -46,8 +42,8 @@ namespace FrontierWidgetFramework.WidgetUtility
     // Widget Size & Position Classes
     public class WidgetBaseUnit
     {
-        public const int Width = 204;
-        public const int Height = 149;
+        public const int Width = 200;
+        public const int Height = 145;
         public const int OffsetX = 4;
         public const int OffsetY = 4;
     }
@@ -71,7 +67,15 @@ namespace FrontierWidgetFramework.WidgetUtility
 
         public Size ToSize()
         {
-            return new Size(Width * WidgetBaseUnit.Width - WidgetBaseUnit.OffsetX, Height * WidgetBaseUnit.Height - WidgetBaseUnit.OffsetY);
+            return new Size(
+                WidgetBaseUnit.Width * Width + WidgetBaseUnit.OffsetX * (Width - 1),
+                WidgetBaseUnit.Height * Height + WidgetBaseUnit.OffsetY * (Height - 1)
+                );
+        }
+
+        public bool Equals(int width, int height)
+        {
+            return (Width == width && Height == height);
         }
     }
 
