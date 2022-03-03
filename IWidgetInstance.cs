@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Controls;
 
 namespace FrontierWidgetFramework
 {
@@ -19,7 +20,7 @@ namespace FrontierWidgetFramework
         // Functionality
         public void RequestUpdate();
         public void ClickEvent(ClickType click_type, int x, int y);
-        public void ShowSettings();
+        public UserControl GetSettingsControl();
         public void Dispose();
         public void EnterSleep();
         public void ExitSleep();
