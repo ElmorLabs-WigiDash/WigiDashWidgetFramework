@@ -20,7 +20,7 @@ namespace FrontierWidgetFramework
         event FullScreenExitedEventHandler FullScreenExited;
 
         // Functionality
-        bool StoreSetting(Guid instance_guid, string name, string value);
-        bool LoadSetting(Guid instance_guid, string name, out string value);
+        bool StoreSetting(IWidgetInstance instance, string name, string value);
+        bool LoadSetting(IWidgetInstance instance, string name, out string value);
     }
 }
