@@ -12,7 +12,6 @@ namespace FrontierWidgetFramework
         public IWidgetObject WidgetObject { get; }
         public Guid Guid { get; }
         public WidgetSize WidgetSize { get; }
-        public List<InstanceSetting> InstanceSettings { get; set; }
 
         // Events
         event WidgetUpdatedEventHandler WidgetUpdated;
