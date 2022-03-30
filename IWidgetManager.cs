@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FrontierWidgetFramework
 {
@@ -26,8 +27,8 @@ namespace FrontierWidgetFramework
         bool LoadSetting(IWidgetInstance instance, string name, out string value);
 
         // Hardware sensors
-        AddMonitoringItem(SensorItem item);
-        RemoveMonitoringItem(SensorItem item);
+        bool AddMonitoringItem(SensorItem item);
+        bool RemoveMonitoringItem(SensorItem item);
         List<SensorItem> GetSensorList();
 
     }
