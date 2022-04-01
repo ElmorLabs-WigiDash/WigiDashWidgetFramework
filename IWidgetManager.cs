@@ -3,14 +3,11 @@ using System.Collections.Generic;
 
 namespace FrontierWidgetFramework
 {
-    public class FullScreenEventArgs : EventArgs
-    {
-        public Guid InstanceGuid;
-    }
 
-    public delegate void FullScreenEnteredEventHandler(FullScreenEventArgs e);
-    public delegate void FullScreenExitedEventHandler(FullScreenEventArgs e);
+    public delegate void FullScreenEnteredEventHandler(Guid instance_guid);
+    public delegate void FullScreenExitedEventHandler(Guid instance_guid);
     public delegate void SensorUpdatedEventHandler(SensorItem item, double value);
+    public delegate void ActionRequestedEventHandler(Guid event_guid);
 
     public interface IWidgetManager
     {
@@ -20,17 +17,28 @@ namespace FrontierWidgetFramework
         // Events
         event FullScreenEnteredEventHandler FullScreenEntered;
         event FullScreenExitedEventHandler FullScreenExited;
-        public event SensorUpdatedEventHandler SensorUpdated;
+        event SensorUpdatedEventHandler SensorUpdated;
+        event ActionRequestedEventHandler ActionRequested;
 
         // Functionality
-        bool StoreSetting(IWidgetInstance instance, string name, string value);
-        bool LoadSetting(IWidgetInstance instance, string name, out string value);
+        bool StoreSetting(IWidgetInstance widget_instance, string name, string value);
+        bool LoadSetting(IWidgetInstance widget_instance, string name, out string value);
 
         // Hardware sensors
         bool AddMonitoringItem(SensorItem item);
         bool RemoveMonitoringItem(SensorItem item);
         List<SensorItem> GetSensorList();
 
+        // Action Center Events
+        Dictionary<Guid, string> GetEventList();
+        Guid RegisterEvent(IWidgetInstance widget_instance, string name);
+        void UnregisterEvent(IWidgetInstance widget_instance, Guid event_guid);
+        void TriggerEvent(Guid event_guid);
+
+        // Action Center Actions
+        Dictionary<Guid, string> GetActionList();
+        Guid RegisterAction(IWidgetInstance widget_instance, string name);
+        void UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
     }
 
     public class SensorItem {

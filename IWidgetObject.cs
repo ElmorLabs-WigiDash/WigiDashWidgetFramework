@@ -1,15 +1,11 @@
 ﻿using FrontierWidgetFramework.WidgetUtility;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace FrontierWidgetFramework
 {
     public interface IWidgetObject : IWidgetBase
     {
-        // Definition
-        public string Description { get; }
-        public List<WidgetSize> SupportedSizes { get; }
 
         // Function
         IWidgetManager WidgetManager { get; set; }
@@ -21,5 +17,6 @@ namespace FrontierWidgetFramework
         WidgetError Load(string ResourcePath);
         WidgetError Unload();
         public string LastErrorMessage { get; set; }
+
     }
 }
