@@ -29,16 +29,16 @@ namespace FrontierWidgetFramework
         bool RemoveMonitoringItem(SensorItem item);
         List<SensorItem> GetSensorList();
 
-        // Action Center Events
-        Dictionary<Guid, string> GetEventList();
-        Guid RegisterEvent(IWidgetInstance widget_instance, string name);
-        void UnregisterEvent(IWidgetInstance widget_instance, Guid event_guid);
-        void TriggerEvent(Guid event_guid);
+        // Action Center Triggers
+        Dictionary<Guid, string> GetTriggerList();
+        bool RegisterTrigger(IWidgetInstance widget_instance, Guid trigger_guid, string trigger_name);
+        bool UnregisterTrigger(IWidgetInstance widget_instance, Guid trigger_guid);
+        void OnTriggerOccurred(Guid trigger_guid);
 
         // Action Center Actions
         Dictionary<Guid, string> GetActionList();
-        Guid RegisterAction(IWidgetInstance widget_instance, string name);
-        void UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
+        bool RegisterAction(IWidgetInstance widget_instance, Guid action_guid, string name);
+        bool UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
     }
 
     public class SensorItem {
