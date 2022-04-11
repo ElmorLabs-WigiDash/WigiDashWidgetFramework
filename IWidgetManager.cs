@@ -7,7 +7,7 @@ namespace FrontierWidgetFramework
     public delegate void FullScreenEnteredEventHandler(Guid instance_guid);
     public delegate void FullScreenExitedEventHandler(Guid instance_guid);
     public delegate void SensorUpdatedEventHandler(SensorItem item, double value);
-    public delegate void ActionRequestedEventHandler(Guid event_guid);
+    public delegate void ActionRequestedEventHandler(Guid action_guid);
 
     public interface IWidgetManager
     {
