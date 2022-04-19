@@ -47,16 +47,19 @@ namespace FrontierWidgetFramework
         public int ReadingType;
         public int SensorId1;
         public int SensorId2;
+        public string Source;
         public string Name;
         public string Unit;
 
-        public SensorItem(Guid guid, int reading_type, int sensor_id1, int sensor_id2, string name, string unit) {
+        public SensorItem(Guid guid, int reading_type, int sensor_id1, int sensor_id2, string source, string name, string unit) {
             Guid = guid;
             SensorId1 = sensor_id1;
             SensorId2 = sensor_id2;
             ReadingType = reading_type;
+            Source = source;
             Name = name;
             Unit = unit;
         }
+
     }
 }
