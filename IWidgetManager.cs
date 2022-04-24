@@ -24,6 +24,9 @@ namespace FrontierWidgetFramework
         bool StoreSetting(IWidgetInstance widget_instance, string name, string value);
         bool LoadSetting(IWidgetInstance widget_instance, string name, out string value);
 
+        bool RequestEnterFullScreen(IWidgetInstance widget_instance);
+        bool RequestExitFullScreen(IWidgetInstance widget_instance);
+
         // Hardware sensors
         bool AddMonitoringItem(SensorItem item);
         bool RemoveMonitoringItem(SensorItem item);
