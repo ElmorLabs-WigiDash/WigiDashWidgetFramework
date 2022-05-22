@@ -3,6 +3,7 @@ using System.Drawing;
 
 namespace FrontierWidgetFramework.WidgetUtility
 {
+
     public enum ClickType : int
     {
         None, Single, Double, Long
@@ -82,6 +83,9 @@ namespace FrontierWidgetFramework.WidgetUtility
     // Utility Functions
     public static class WidgetUtility
     {
+
+        public const SdkVersion CurrentSdkVersion = SdkVersion.Version_0;
+
         public static Color ColorTo16bit(Color color)
         {
 
