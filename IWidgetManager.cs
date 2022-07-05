@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Xml.Serialization;
 
 namespace FrontierWidgetFramework
 {
@@ -8,17 +10,22 @@ namespace FrontierWidgetFramework
     public delegate void FullScreenExitedEventHandler(Guid instance_guid);
     public delegate void SensorUpdatedEventHandler(SensorItem item, double value);
     public delegate void ActionRequestedEventHandler(Guid action_guid);
+    public delegate void GlobalThemeUpdateEventHandler();
 
     public interface IWidgetManager
     {
         // Definition
         WidgetUtility.SdkVersion CurrentSdkVersion { get; }
 
+        // Theming
+        WidgetTheme GlobalWidgetTheme { get; set; }
+
         // Events
         event FullScreenEnteredEventHandler FullScreenEntered;
         event FullScreenExitedEventHandler FullScreenExited;
         event SensorUpdatedEventHandler SensorUpdated;
         event ActionRequestedEventHandler ActionRequested;
+        event GlobalThemeUpdateEventHandler GlobalThemeUpdated;
 
         // Functionality
         bool StoreSetting(IWidgetInstance widget_instance, string name, string value);
@@ -42,6 +49,7 @@ namespace FrontierWidgetFramework
         Dictionary<Guid, string> GetActionList();
         bool RegisterAction(IWidgetInstance widget_instance, Guid action_guid, string name);
         bool UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
+        void TriggerAction(Guid device_guid, Guid action_guid);
     }
 
     public class SensorItem {
@@ -64,5 +72,15 @@ namespace FrontierWidgetFramework
             Unit = unit;
         }
 
+    }
+
+    public class WidgetTheme
+    {
+        public Font PrimaryFont { get; set; } = new Font("Basic Square 7", 32);
+        public Font SecondaryFont { get; set; } = new Font("Basic Square 7", 26);
+        public Color PrimaryFgColor { get; set; } = Color.White;
+        public Color SecondaryFgColor { get; set; } = Color.Red;
+        public Color PrimaryBgColor { get; set; } = Color.Black;
+        public Color SecondaryBgColor { get; set; } = Color.Gray;
     }
 }
