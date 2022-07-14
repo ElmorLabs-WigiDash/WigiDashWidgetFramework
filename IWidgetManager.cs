@@ -6,8 +6,8 @@ using System.Xml.Serialization;
 namespace FrontierWidgetFramework
 {
 
-    public delegate void FullScreenEnteredEventHandler(Guid instance_guid);
-    public delegate void FullScreenExitedEventHandler(Guid instance_guid);
+    public delegate void FullScreenEnteredEventHandler(Guid page_guid, Guid instance_guid);
+    public delegate void FullScreenExitedEventHandler(Guid page_guid, Guid instance_guid);
     public delegate void SensorUpdatedEventHandler(SensorItem item, double value);
     public delegate void ActionRequestedEventHandler(Guid action_guid);
     public delegate void GlobalThemeUpdateEventHandler();
