@@ -34,6 +34,9 @@ namespace FrontierWidgetFramework
         bool RequestEnterFullScreen(IWidgetInstance widget_instance);
         bool RequestExitFullScreen(IWidgetInstance widget_instance);
 
+        Font RequestFontSelection(Font defaultFont);
+        Color RequestColorSelection(Color defaultColor);
+
         // Hardware sensors
         bool AddMonitoringItem(SensorItem item);
         bool RemoveMonitoringItem(SensorItem item);
