@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml.Serialization;
+using FrontierWidgetFramework.WidgetUtility;
 
 namespace FrontierWidgetFramework
 {
@@ -33,6 +34,8 @@ namespace FrontierWidgetFramework
 
         bool RequestEnterFullScreen(IWidgetInstance widget_instance);
         bool RequestExitFullScreen(IWidgetInstance widget_instance);
+
+        bool RequestPrivilegedExecution(IWidgetInstance widgetInstance, PrivilegeRequest request);
 
         Font RequestFontSelection(Font defaultFont);
         Color RequestColorSelection(Color defaultColor);

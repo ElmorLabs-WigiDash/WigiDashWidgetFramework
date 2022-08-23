@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 
 namespace FrontierWidgetFramework.WidgetUtility
 {
@@ -78,6 +80,13 @@ namespace FrontierWidgetFramework.WidgetUtility
         {
             return (Width == width && Height == height);
         }
+    }
+
+    public class PrivilegeRequest
+    {
+        public string Reason { get; set; }
+        public string ExecutablePath { get; set; }
+        public string ExecutableArgs { get; set; }
     }
 
     // Utility Functions
