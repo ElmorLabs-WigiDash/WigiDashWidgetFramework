@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace FrontierWidgetFramework
 {
-    public interface IWidgetInstance
+    public interface IWidgetInstance : IDisposable
     {
         // Definition
         public IWidgetObject WidgetObject { get; }
@@ -20,14 +20,41 @@ namespace FrontierWidgetFramework
         public void RequestUpdate();
         public void ClickEvent(ClickType click_type, int x, int y);
         public UserControl GetSettingsControl();
-        public void Dispose();
         public void EnterSleep();
         public void ExitSleep();
     }
+
     public class WidgetUpdatedEventArgs : EventArgs
     {
+        private readonly object BitmapLock = new();
+        private Bitmap _currentBitmap;
+
         public Point Offset { get; set; }
-        public Bitmap WidgetBitmap { get; set; }
+
+        public Bitmap WidgetBitmap
+        {
+            get
+            {
+                lock (BitmapLock)
+                {
+                    return new Bitmap(_currentBitmap);
+                }
+            }
+            set
+            {
+                Bitmap oldBitmap;
+                Bitmap newBitmap = new Bitmap(value);
+
+                lock (BitmapLock)
+                {
+                    oldBitmap = _currentBitmap;
+                    _currentBitmap = newBitmap;
+                }
+
+                if (oldBitmap != null) oldBitmap.Dispose();
+            }
+        }
+
         public int WaitMax { get; set; }
     }
 
