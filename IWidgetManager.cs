@@ -55,7 +55,7 @@ namespace FrontierWidgetFramework
         Dictionary<Guid, string> GetActionList();
         bool RegisterAction(IWidgetInstance widget_instance, Guid action_guid, string name);
         bool UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
-        void TriggerAction(Guid device_guid, Guid action_guid);
+        void TriggerAction(Guid action_guid);
     }
 
     public class SensorItem {
