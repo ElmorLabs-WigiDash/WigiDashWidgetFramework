@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
-namespace FrontierWidgetFramework.WidgetUtility
+namespace WigiDashWidgetFramework.WidgetUtility
 {
 
     public enum ClickType : int

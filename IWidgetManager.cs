@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Xml.Serialization;
-using FrontierWidgetFramework.WidgetUtility;
+using WigiDashWidgetFramework.WidgetUtility;
 
-namespace FrontierWidgetFramework
+namespace WigiDashWidgetFramework
 {
 
     public delegate void FullScreenEnteredEventHandler(Guid page_guid, Guid instance_guid);

@@ -1,8 +1,8 @@
-﻿using FrontierWidgetFramework.WidgetUtility;
+﻿using WigiDashWidgetFramework.WidgetUtility;
 using System;
 using System.Drawing;
 
-namespace FrontierWidgetFramework
+namespace WigiDashWidgetFramework
 {
     public interface IWidgetObject : IWidgetBase
     {

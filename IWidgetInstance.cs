@@ -1,10 +1,10 @@
-﻿using FrontierWidgetFramework.WidgetUtility;
+﻿using WigiDashWidgetFramework.WidgetUtility;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Controls;
 
-namespace FrontierWidgetFramework
+namespace WigiDashWidgetFramework
 {
     public interface IWidgetInstance : IDisposable
     {

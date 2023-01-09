@@ -3,8 +3,8 @@
     <OutputType>Library</OutputType>
 	  <TargetFramework>net472</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyName>FrontierWidgetFramework</AssemblyName>
-    <RootNamespace>FrontierWidgetFramework</RootNamespace>
+    <AssemblyName>WigiDashWidgetFramework</AssemblyName>
+    <RootNamespace>WigiDashWidgetFramework</RootNamespace>
     <Version>1.0.0.0</Version>
     <Configurations>Debug;Release</Configurations>
     <Copyright>Copyright © mingu 2022</Copyright>
