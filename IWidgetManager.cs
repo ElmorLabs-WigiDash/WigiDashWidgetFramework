@@ -55,6 +55,7 @@ namespace WigiDashWidgetFramework
         Dictionary<Guid, string> GetActionList();
         string GetActionString(Guid deviceGuid, Guid actionGuid);
         bool CreateAction(Guid deviceGuid, Guid actionGuid, string actionName, out Guid actionGuidOut);
+        bool EditAction(Guid deviceGuid, Guid actionGuid, string actionName = "");
         bool RemoveAction(Guid deviceGuid, Guid action_guid);
         bool RegisterAction(IWidgetInstance widget_instance, Guid action_guid, string name);
         bool UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
