@@ -24,6 +24,11 @@ namespace WigiDashWidgetFramework
         public void ExitSleep();
     }
 
+    public interface IWidgetInstanceWithRemoval : IWidgetInstance
+    {
+        public void OnRemove();
+    }
+
     public class WidgetUpdatedEventArgs : EventArgs
     {
         private readonly object BitmapLock = new();
