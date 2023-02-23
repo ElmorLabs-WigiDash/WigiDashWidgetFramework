@@ -57,6 +57,7 @@ namespace WigiDashWidgetFramework
         bool CreateAction(Guid deviceGuid, Guid actionGuid, string actionName, out Guid actionGuidOut);
         bool EditAction(Guid deviceGuid, Guid actionGuid, string actionName = "");
         bool RemoveAction(Guid deviceGuid, Guid action_guid);
+        bool MoveAction(Guid deviceGuid, Guid ruleGuid, Guid actionGuid, int newIndex);
         bool RegisterAction(IWidgetInstance widget_instance, Guid action_guid, string name);
         bool UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
         void TriggerAction(Guid action_guid);
