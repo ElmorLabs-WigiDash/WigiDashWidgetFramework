@@ -7,11 +7,15 @@ using WigiDashWidgetFramework.WidgetUtility;
 namespace WigiDashWidgetFramework
 {
 
+    public enum AidaStatus { Disconnected, Connected, Error };
+
     public delegate void FullScreenEnteredEventHandler(Guid page_guid, Guid instance_guid);
     public delegate void FullScreenExitedEventHandler(Guid page_guid, Guid instance_guid);
     public delegate void SensorUpdatedEventHandler(SensorItem item, double value);
     public delegate void ActionRequestedEventHandler(Guid action_guid);
     public delegate void GlobalThemeUpdateEventHandler();
+    public delegate void AidaWidgetUpdateEventHandler(Bitmap bitmap);
+    public delegate void AidaStatusUpdatedEventHandler(AidaStatus status);
 
     public interface IWidgetManager
     {
@@ -27,6 +31,8 @@ namespace WigiDashWidgetFramework
         event SensorUpdatedEventHandler SensorUpdated;
         event ActionRequestedEventHandler ActionRequested;
         event GlobalThemeUpdateEventHandler GlobalThemeUpdated;
+        event AidaWidgetUpdateEventHandler AidaWidgetUpdated;
+        event AidaStatusUpdatedEventHandler AidaStatusUpdated;
 
         // Functionality
         bool StoreSetting(IWidgetInstance widget_instance, string name, string value);
@@ -63,6 +69,11 @@ namespace WigiDashWidgetFramework
         void TriggerAction(Guid action_guid);
 
         Guid? GetParentDevice(IWidgetInstance instance);
+
+        // Aida
+        bool RegisterAidaWidget(IWidgetInstance widget_instance);
+        bool UnregisterAidaWidget(IWidgetInstance widget_instance);
+
     }
 
     public class SensorItem {
