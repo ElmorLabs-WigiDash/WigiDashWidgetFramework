@@ -20,10 +20,11 @@ namespace WigiDashWidgetFramework
     public interface IWidgetManager
     {
         // Definition
-        WidgetUtility.SdkVersion CurrentSdkVersion { get; }
+        SdkVersion CurrentSdkVersion { get; }
 
         // Theming
         WidgetTheme GlobalWidgetTheme { get; set; }
+        bool PreferGlobalTheme { get; set; }
 
         // Events
         event FullScreenEnteredEventHandler FullScreenEntered;
@@ -104,7 +105,7 @@ namespace WigiDashWidgetFramework
         public Font SecondaryFont { get; set; } = new Font("Basic Square 7", 26);
         public Color PrimaryFgColor { get; set; } = Color.White;
         public Color SecondaryFgColor { get; set; } = Color.Red;
-        public Color PrimaryBgColor { get; set; } = Color.Black;
+        public Color PrimaryBgColor { get; set; } = Color.FromArgb(48, 48, 48);
         public Color SecondaryBgColor { get; set; } = Color.Gray;
     }
 }
