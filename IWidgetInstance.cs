@@ -29,6 +29,11 @@ namespace WigiDashWidgetFramework
         public void OnRemove();
     }
 
+    public interface IWidgetInstanceWithFullscreen : IWidgetInstance
+    {
+        public void SetFullscreen(bool fullscreen);
+    }
+
     public class WidgetUpdatedEventArgs : EventArgs
     {
         private readonly object BitmapLock = new();
@@ -47,16 +52,19 @@ namespace WigiDashWidgetFramework
             }
             set
             {
-                Bitmap oldBitmap;
-                Bitmap newBitmap = new Bitmap(value);
-
-                lock (BitmapLock)
+                try
                 {
-                    oldBitmap = _currentBitmap;
-                    _currentBitmap = newBitmap;
-                }
+                    Bitmap oldBitmap;
+                    Bitmap newBitmap = new Bitmap(value);
 
-                if (oldBitmap != null) oldBitmap.Dispose();
+                    lock (BitmapLock)
+                    {
+                        oldBitmap = _currentBitmap;
+                        _currentBitmap = newBitmap;
+                    }
+
+                    if (oldBitmap != null) oldBitmap.Dispose();
+                } catch { }
             }
         }
 
