@@ -45,9 +45,22 @@ namespace WigiDashWidgetFramework
         {
             get
             {
-                lock (BitmapLock)
+                if (_currentBitmap == null)
                 {
-                    return new Bitmap(_currentBitmap);
+                    // Handle downstream
+                    return null;
+                }
+
+                try
+                {
+                    lock (BitmapLock)
+                    {
+                        return new Bitmap(_currentBitmap);
+                    }
+                } catch
+                {
+                    // Handle downstream
+                    return null;
                 }
             }
             set
