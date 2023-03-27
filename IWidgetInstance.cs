@@ -1,4 +1,4 @@
-﻿using WigiDashWidgetFramework.WidgetUtility;
+using WigiDashWidgetFramework.WidgetUtility;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
