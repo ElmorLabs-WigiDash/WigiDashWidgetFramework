@@ -38,7 +38,6 @@ namespace WigiDashWidgetFramework
     {
         private readonly object BitmapLock = new();
         private Bitmap _currentBitmap;
-        private Bitmap _lastValidBitmap;
 
         public Point Offset { get; set; }
 
@@ -48,33 +47,23 @@ namespace WigiDashWidgetFramework
             {
                 lock (BitmapLock)
                 {
-                    try
-                    {
-                        return new Bitmap(_currentBitmap);
-                    } catch
-                    {
-                        return new Bitmap(_lastValidBitmap);
-                    } finally
-                    {
-                        if (_lastValidBitmap != null) _lastValidBitmap.Dispose();
-                    }
+                    return new Bitmap(_currentBitmap);
                 }
             }
             set
             {
                 try
                 {
-                    if (value == null) throw new ArgumentNullException(nameof(value));
-
+                    Bitmap oldBitmap;
                     Bitmap newBitmap = new Bitmap(value);
 
                     lock (BitmapLock)
                     {
-                        _lastValidBitmap = _currentBitmap;
+                        oldBitmap = _currentBitmap;
                         _currentBitmap = newBitmap;
                     }
 
-                    if (_lastValidBitmap != null) _lastValidBitmap.Dispose();
+                    if (oldBitmap != null) oldBitmap.Dispose();
                 } catch { }
             }
         }
