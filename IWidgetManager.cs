@@ -36,7 +36,7 @@ namespace WigiDashWidgetFramework
         event AidaStatusUpdatedEventHandler AidaStatusUpdated;
 
         // Functionality
-        bool StoreSetting(IWidgetInstance widget_instance, string name, string value);
+        bool StoreSetting(IWidgetInstance widget_instance, string name, string value, bool cloneable = true);
         bool LoadSetting(IWidgetInstance widget_instance, string name, out string value);
 
         bool RequestEnterFullScreen(IWidgetInstance widget_instance);
