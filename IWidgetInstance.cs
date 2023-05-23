@@ -45,22 +45,23 @@ namespace WigiDashWidgetFramework
         {
             get
             {
-                if (_currentBitmap == null)
+                lock (BitmapLock)
                 {
-                    // Handle downstream
-                    return null;
-                }
+                    if (_currentBitmap == null)
+                    {
+                        // Handle downstream
+                        return null;
+                    }
 
-                try
-                {
-                    lock (BitmapLock)
+                    try
                     {
                         return new Bitmap(_currentBitmap);
                     }
-                } catch
-                {
-                    // Handle downstream
-                    return null;
+                    catch
+                    {
+                        // Handle downstream
+                        return null;
+                    }
                 }
             }
             set
@@ -77,12 +78,14 @@ namespace WigiDashWidgetFramework
                     }
 
                     if (oldBitmap != null) oldBitmap.Dispose();
-                } catch { }
+                }
+                catch { }
             }
         }
 
         public int WaitMax { get; set; }
     }
+
 
     public delegate void WidgetUpdatedEventHandler(IWidgetInstance widget_instance, WidgetUpdatedEventArgs e);
 }
