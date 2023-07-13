@@ -8,7 +8,7 @@ namespace WigiDashWidgetFramework.WidgetUtility
 
     public enum ClickType : int
     {
-        None, Single, Double, Long
+        None, Single, Double, Long, SwipeLeft, SwipeRight, SwipeUp, SwipeDown
     }
 
     public struct ClickInfo
