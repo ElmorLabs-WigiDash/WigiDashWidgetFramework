@@ -40,8 +40,10 @@ namespace WigiDashWidgetFramework
         bool StoreSetting(IWidgetInstance widget_instance, string name, string value, bool cloneable = true);
         bool LoadSetting(IWidgetInstance widget_instance, string name, out string value);
 
-        bool StoreFile(IWidgetInstance widget_instance, string name, string filePath);
+        bool StoreFile(IWidgetInstance widget_instance, string name, string filePath, out string outFilePath);
         bool LoadFile(IWidgetInstance widget_instance, string name, out string filePath);
+        bool RemoveFile(IWidgetInstance widget_instance, string name);
+        bool CreateFile(IWidgetInstance widget_instance, string name, string fileName, out string outFilePath);
 
         bool RequestEnterFullScreen(IWidgetInstance widget_instance);
         bool RequestExitFullScreen(IWidgetInstance widget_instance);
