@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Xml.Serialization;
 using WigiDashWidgetFramework.WidgetUtility;
 
@@ -38,6 +39,9 @@ namespace WigiDashWidgetFramework
         // Functionality
         bool StoreSetting(IWidgetInstance widget_instance, string name, string value, bool cloneable = true);
         bool LoadSetting(IWidgetInstance widget_instance, string name, out string value);
+
+        bool StoreFile(IWidgetInstance widget_instance, string name, string filePath);
+        bool LoadFile(IWidgetInstance widget_instance, string name, out string filePath);
 
         bool RequestEnterFullScreen(IWidgetInstance widget_instance);
         bool RequestExitFullScreen(IWidgetInstance widget_instance);
