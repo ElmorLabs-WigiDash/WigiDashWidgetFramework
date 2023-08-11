@@ -52,9 +52,11 @@ namespace WigiDashWidgetFramework
                     {
                         try
                         {
-                             new Bitmap(_currentBitmap);
+                            return new Bitmap(_currentBitmap);
                         }
-                        catch { }
+                        catch {
+                            return null;
+                        }
                     }
                 }
 
