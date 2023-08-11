@@ -45,41 +45,41 @@ namespace WigiDashWidgetFramework
         {
             get
             {
-                lock (BitmapLock)
+                if (_currentBitmap != null)
                 {
-                    if (_currentBitmap == null)
-                    {
-                        // Handle downstream
-                        return null;
-                    }
-
-                    try
-                    {
-                        return new Bitmap(_currentBitmap);
-                    }
-                    catch
-                    {
-                        // Handle downstream
-                        return null;
-                    }
-                }
-            }
-            set
-            {
-                try
-                {
-                    Bitmap oldBitmap;
-                    Bitmap newBitmap = new Bitmap(value);
 
                     lock (BitmapLock)
                     {
-                        oldBitmap = _currentBitmap;
-                        _currentBitmap = newBitmap;
+                        try
+                        {
+                             new Bitmap(_currentBitmap);
+                        }
+                        catch { }
                     }
-
-                    if (oldBitmap != null) oldBitmap.Dispose();
                 }
-                catch { }
+
+                // Handle downstream
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    try
+                    {
+                        Bitmap oldBitmap;
+                        Bitmap newBitmap = new Bitmap(value);
+
+                        lock (BitmapLock)
+                        {
+                            oldBitmap = _currentBitmap;
+                            _currentBitmap = newBitmap;
+                        }
+
+                        if (oldBitmap != null) oldBitmap.Dispose();
+                    }
+                    catch { }
+                }
             }
         }
 
