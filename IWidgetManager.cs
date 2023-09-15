@@ -65,12 +65,16 @@ namespace WigiDashWidgetFramework
         void OnTriggerOccurred(Guid trigger_guid);
 
         // Action Center Actions
-        Dictionary<Guid, string> GetActionList();
         string GetActionString(Guid deviceGuid, Guid actionGuid);
+        
         bool CreateAction(Guid deviceGuid, Guid actionGuid, string actionName, out Guid actionGuidOut);
         bool EditAction(Guid deviceGuid, Guid actionGuid, string actionName = "");
         bool RemoveAction(Guid deviceGuid, Guid action_guid);
-        bool MoveAction(Guid deviceGuid, Guid ruleGuid, Guid actionGuid, int newIndex);
+
+        bool BindAction(IWidgetInstance widget_instance, Guid actionGuid);
+        bool UnbindAction(IWidgetInstance widget_instance, Guid actionGuid);
+        List<Guid> GetBoundActions(IWidgetInstance widget_instance);
+
         bool RegisterAction(IWidgetInstance widget_instance, Guid action_guid, string name);
         bool UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
         void TriggerAction(Guid action_guid);
@@ -108,7 +112,7 @@ namespace WigiDashWidgetFramework
     public class WidgetTheme
     {
         public Font PrimaryFont { get; set; } = new Font("Basic Square 7", 32);
-        public Font SecondaryFont { get; set; } = new Font("Basic Square 7", 26);
+        public Font SecondaryFont { get; set; } = new Font("Basic Square 7 Solid", 26);
         public Color PrimaryFgColor { get; set; } = Color.White;
         public Color SecondaryFgColor { get; set; } = Color.Red;
         public Color PrimaryBgColor { get; set; } = Color.FromArgb(48, 48, 48);
