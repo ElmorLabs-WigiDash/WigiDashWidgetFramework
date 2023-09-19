@@ -9,6 +9,7 @@ namespace WigiDashWidgetFramework
 
         // Function
         IWidgetManager WidgetManager { get; set; }
+        public Bitmap WidgetThumbnail { get; }
         public Bitmap GetWidgetPreview(WidgetSize widgetSize);
         public IWidgetInstance CreateWidgetInstance(WidgetSize widgetSize, Guid instanceGuid);
         public bool RemoveWidgetInstance(Guid instanceGuid);
