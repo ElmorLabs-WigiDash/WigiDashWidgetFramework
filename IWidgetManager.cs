@@ -10,10 +10,19 @@ namespace WigiDashWidgetFramework
 
     public enum AidaStatus { Disconnected, Connected, Error };
 
-    public delegate void FullScreenEnteredEventHandler(Guid page_guid, Guid instance_guid);
-    public delegate void FullScreenExitedEventHandler(Guid page_guid, Guid instance_guid);
+    public enum LogLevel
+    {
+        DEBUG,
+        INFO,
+        WARN,
+        ERROR,
+        FATAL
+    }
+
+    public delegate void FullScreenEnteredEventHandler(Guid pageGuid, Guid instanceGuid);
+    public delegate void FullScreenExitedEventHandler(Guid pageGuid, Guid instanceGuid);
     public delegate void SensorUpdatedEventHandler(SensorItem item, double value);
-    public delegate void ActionRequestedEventHandler(Guid action_guid);
+    public delegate void ActionRequestedEventHandler(Guid actionGuid);
     public delegate void GlobalThemeUpdateEventHandler();
     public delegate void AidaWidgetUpdateEventHandler(Bitmap bitmap);
     public delegate void AidaStatusUpdatedEventHandler(AidaStatus status);
@@ -37,54 +46,56 @@ namespace WigiDashWidgetFramework
         event AidaStatusUpdatedEventHandler AidaStatusUpdated;
 
         // Functionality
-        bool StoreSetting(IWidgetInstance widget_instance, string name, string value, bool cloneable = true);
-        bool LoadSetting(IWidgetInstance widget_instance, string name, out string value);
+        bool StoreSetting(IWidgetInstance widgetInstance, string settingId, string settingValue, bool isCloneable = true);
+        bool LoadSetting(IWidgetInstance widgetInstance, string settingId, out string settingValue);
 
-        bool StoreFile(IWidgetInstance widget_instance, string name, string filePath, out string outFilePath);
-        bool LoadFile(IWidgetInstance widget_instance, string name, out string filePath);
-        bool RemoveFile(IWidgetInstance widget_instance, string name);
-        bool CreateFile(IWidgetInstance widget_instance, string name, string fileName, out string outFilePath);
+        bool StoreFile(IWidgetInstance widgetInstance, string fileId, string sourceFilePath, out string storedFilePath);
+        bool LoadFile(IWidgetInstance widgetInstance, string fileId, out string storedFilePath);
+        bool RemoveFile(IWidgetInstance widgetInstance, string fileId);
+        bool CreateFile(IWidgetInstance widgetInstance, string fileId, string newFileName, out string storedFilePath);
 
-        bool RequestEnterFullScreen(IWidgetInstance widget_instance);
-        bool RequestExitFullScreen(IWidgetInstance widget_instance);
+        bool RequestEnterFullScreen(IWidgetInstance widgetInstance);
+        bool RequestExitFullScreen(IWidgetInstance widgetInstance);
 
-        bool RequestPrivilegedExecution(IWidgetInstance widgetInstance, PrivilegeRequest request);
+        //bool RequestPrivilegedExecution(IWidgetInstance widgetInstance, PrivilegeRequest request);
 
-        Font RequestFontSelection(Font defaultFont);
-        Color RequestColorSelection(Color defaultColor);
+        Font RequestFontSelection(Font defaultFontSelection);
+        Color RequestColorSelection(Color defaultColorSelection);
 
         // Hardware sensors
-        bool AddMonitoringItem(SensorItem item);
-        bool RemoveMonitoringItem(SensorItem item);
+        bool AddMonitoringItem(SensorItem sensorItem);
+        bool RemoveMonitoringItem(SensorItem sensorItem);
         List<SensorItem> GetSensorList();
 
         // Action Center Triggers
         Dictionary<Guid, string> GetTriggerList();
-        bool RegisterTrigger(IWidgetInstance widget_instance, Guid trigger_guid, string trigger_name);
-        bool UnregisterTrigger(IWidgetInstance widget_instance, Guid trigger_guid);
-        void OnTriggerOccurred(Guid trigger_guid);
+        bool RegisterTrigger(IWidgetInstance widgetInstance, Guid triggerGuid, string triggerName);
+        bool UnregisterTrigger(IWidgetInstance widgetInstance, Guid triggerGuid);
+        void OnTriggerOccurred(Guid triggerGuid);
 
         // Action Center Actions
         string GetActionString(Guid deviceGuid, Guid actionGuid);
         
         bool CreateAction(Guid deviceGuid, Guid actionGuid, string actionName, out Guid actionGuidOut);
         bool EditAction(Guid deviceGuid, Guid actionGuid, string actionName = "");
-        bool RemoveAction(Guid deviceGuid, Guid action_guid);
+        bool RemoveAction(Guid deviceGuid, Guid actionGuid);
 
-        bool BindAction(IWidgetInstance widget_instance, Guid actionGuid);
-        bool UnbindAction(IWidgetInstance widget_instance, Guid actionGuid);
-        List<Guid> GetBoundActions(IWidgetInstance widget_instance);
+        bool BindAction(IWidgetInstance widgetInstance, Guid actionGuid);
+        bool UnbindAction(IWidgetInstance widgetInstance, Guid actionGuid);
+        List<Guid> GetBoundActions(IWidgetInstance widgetInstance);
 
-        bool RegisterAction(IWidgetInstance widget_instance, Guid action_guid, string name);
-        bool UnregisterAction(IWidgetInstance widget_instance, Guid action_guid);
-        void TriggerAction(Guid action_guid);
+        bool RegisterAction(IWidgetInstance widgetInstance, Guid actionGuid, string actionName);
+        bool UnregisterAction(IWidgetInstance widgetInstance, Guid actionGuid);
+        void TriggerAction(Guid actionGuid);
 
-        Guid? GetParentDevice(IWidgetInstance instance);
+        Guid? GetParentDevice(IWidgetInstance widgetInstance);
 
         // Aida
-        bool RegisterAidaWidget(IWidgetInstance widget_instance);
-        bool UnregisterAidaWidget(IWidgetInstance widget_instance);
+        bool RegisterAidaWidget(IWidgetInstance widgetInstance);
+        bool UnregisterAidaWidget(IWidgetInstance widgetInstance);
 
+        // Logging
+        void WriteLogMessage(IWidgetInstance widgetInstance, LogLevel logLevel, string logMessage, string verboseLogMessage = "");
     }
 
     public class SensorItem {
