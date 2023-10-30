@@ -61,6 +61,7 @@ namespace WigiDashWidgetFramework
 
         Font RequestFontSelection(Font defaultFontSelection);
         Color RequestColorSelection(Color defaultColorSelection);
+        string RequestImageSelection(string defaultImagePath);
 
         // Hardware sensors
         bool AddMonitoringItem(SensorItem sensorItem);
