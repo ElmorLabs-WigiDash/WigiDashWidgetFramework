@@ -130,5 +130,6 @@ namespace WigiDashWidgetFramework
         public Color SecondaryFgColor { get; set; } = Color.Red;
         public Color PrimaryBgColor { get; set; } = Color.FromArgb(48, 48, 48);
         public Color SecondaryBgColor { get; set; } = Color.Gray;
+        public int CornerRadius { get; set; } = 15;
     }
 }
