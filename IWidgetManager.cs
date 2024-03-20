@@ -10,16 +10,6 @@ namespace WigiDashWidgetFramework
 
     public enum AidaStatus { Disconnected, Connected, Error };
 
-    public enum LogLevel
-    {
-        TRACE,
-        DEBUG,
-        INFO,
-        WARN,
-        ERROR,
-        FATAL
-    }
-
     public delegate void FullScreenEnteredEventHandler(Guid pageGuid, Guid instanceGuid);
     public delegate void FullScreenExitedEventHandler(Guid pageGuid, Guid instanceGuid);
     public delegate void SensorUpdatedEventHandler(SensorItem item, double value);
@@ -98,6 +88,8 @@ namespace WigiDashWidgetFramework
 
         // Logging
         void WriteLogMessage(IWidgetInstance widgetInstance, LogLevel logLevel, string logMessage, string verboseLogMessage = "");
+
+        void WriteLogMessage(IWidgetInstance widgetInstance, LogModel logModel);
     }
 
     public class SensorItem {
