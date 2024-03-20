@@ -193,6 +193,11 @@ namespace WigiDashWidgetFramework
             LogQueue.Enqueue(new LogModel(level, message, verboseMessage));
         }
 
+        public static void Log(LogModel log)
+        {
+            LogQueue.Enqueue(log);
+        }
+
         // Initialize method to set file logFilePath and start logging
         public static void Init(string logFilePath)
         {

@@ -88,8 +88,6 @@ namespace WigiDashWidgetFramework
 
         // Logging
         void WriteLogMessage(IWidgetInstance widgetInstance, LogLevel logLevel, string logMessage, string verboseLogMessage = "");
-
-        void WriteLogMessage(IWidgetInstance widgetInstance, LogModel logModel);
     }
 
     public class SensorItem {
