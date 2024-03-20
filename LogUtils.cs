@@ -26,7 +26,7 @@ namespace WigiDashWidgetFramework
         public string LogMessage { get; set; }
         public string VerboseLogMessage { get; set; }
 
-        public LogModel(LogLevel level, string message, string verboseMessage = "", [CallerMemberName] string caller = "")
+        public LogModel(LogLevel level, string message, string verboseMessage = "", string caller = "")
         {
             LogLevel = level;
             LogMessage = message;
@@ -43,8 +43,29 @@ namespace WigiDashWidgetFramework
         public static string GetCallingClassName()
         {
             var stackTrace = new System.Diagnostics.StackTrace();
-            var callingMethod = stackTrace.GetFrame(2).GetMethod();
-            return callingMethod.ReflectedType?.Name ?? "Unknown";
+
+            // Calling frame should be outside of LogUtils class,
+            // Logger class,
+            // IWidgetManager interface,
+            // and LogModel class
+
+            for (var i = 0; i < stackTrace.FrameCount; i++)
+            {
+                var frame = stackTrace.GetFrame(i);
+                var method = frame.GetMethod();
+
+                if (method.ReflectedType != typeof(LogUtils) &&
+                    method.ReflectedType != typeof(Logger) &&
+                    method.ReflectedType != typeof(IWidgetManager) &&
+                    method.ReflectedType != typeof(LogModel))
+                {
+                    // Return the namespace and class name
+                    return method.ReflectedType?.FullName ?? "Unknown";
+                }
+            }
+
+
+            return "Unknown";
         }
     }
 
@@ -244,7 +265,9 @@ namespace WigiDashWidgetFramework
             {
                 using var writer = new System.IO.StreamWriter(_logPath, true);
 
-                await writer.WriteLineAsync($"{log.Timestamp} [{log.LogLevel}] {log.Caller}: {log.LogMessage}");
+                string timestamp = log.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+                await writer.WriteLineAsync($"{timestamp} [{log.LogLevel}] {log.Caller}: {log.LogMessage}");
                 if (!string.IsNullOrEmpty(log.VerboseLogMessage))
                 {
                     await writer.WriteLineAsync(log.VerboseLogMessage);
