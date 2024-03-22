@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -36,6 +37,47 @@ namespace WigiDashWidgetFramework
 
             Timestamp = DateTime.Now;
         }
+
+        public override string ToString()
+        {
+            string timestampString = Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+            if (!string.IsNullOrEmpty(VerboseLogMessage))
+            {
+                return $"{timestampString} [{LogLevel}] {Caller}: {LogMessage}\n{VerboseLogMessage}";
+            }
+            else
+            {
+                return $"{timestampString} [{LogLevel}] {Caller}: {LogMessage}";
+            }
+        }
+
+        public static LogModel FromString(string logString)
+        {
+            string[] parts = logString.Split('\n');
+
+            // Parse header
+            string[] headerParts = parts[0].Split(' ');
+            
+            string timestampString = headerParts[0] + " " + headerParts[1];
+            string logLevelString = headerParts[2].Trim('[', ']');
+            string caller = headerParts[3].Trim(':');
+
+            DateTime timestamp = DateTime.ParseExact(timestampString, "yyyy-MM-dd HH:mm:ss.fff", null);
+            LogLevel logLevel = (LogLevel)Enum.Parse(typeof(LogLevel), logLevelString);
+
+            // Parse body
+            string[] bodyParts = parts[1].Split('\n');
+            
+            string logMessage = bodyParts[0];
+            string verboseLogMessage = bodyParts.Length > 2 ? bodyParts[1] : "";
+
+            // Create log model
+            return new LogModel(logLevel, logMessage, verboseLogMessage, caller)
+            {
+                Timestamp = timestamp
+            };
+        }
     }
 
     public class LogUtils
@@ -71,6 +113,12 @@ namespace WigiDashWidgetFramework
 
     public static class Logger
     {
+        // Delegates for log events
+        public delegate void LogEventHandler(LogModel log);
+
+        // Event for log events
+        public static event LogEventHandler LogEvent;
+
         // Queue for logs
         private static readonly Queue<LogModel> LogQueue = new Queue<LogModel>();
 
@@ -211,12 +259,19 @@ namespace WigiDashWidgetFramework
 
         public static void Log(LogLevel level, string message, string verboseMessage = "")
         {
-            LogQueue.Enqueue(new LogModel(level, message, verboseMessage));
+            Log(new LogModel(level, message, verboseMessage));
         }
 
         public static void Log(LogModel log)
         {
+            // Check if log level is enabled
+            if (!EnabledLogLevels.Contains(log.LogLevel))
+            {
+                return;
+            }
+
             LogQueue.Enqueue(log);
+            LogEvent?.Invoke(log);
         }
 
         // Initialize method to set file logFilePath and start logging
@@ -254,20 +309,12 @@ namespace WigiDashWidgetFramework
         // Write log to file
         private static async Task WriteLog(LogModel log)
         {
-            // Check if log level is enabled
-            if (!EnabledLogLevels.Contains(log.LogLevel))
-            {
-                return;
-            }
-
             LogMutex.WaitOne();
             try
             {
                 using var writer = new System.IO.StreamWriter(_logPath, true);
 
-                string timestamp = log.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
-
-                await writer.WriteLineAsync($"{timestamp} [{log.LogLevel}] {log.Caller}: {log.LogMessage}");
+                await writer.WriteLineAsync(log.ToString());
                 if (!string.IsNullOrEmpty(log.VerboseLogMessage))
                 {
                     await writer.WriteLineAsync(log.VerboseLogMessage);
