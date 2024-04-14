@@ -271,7 +271,11 @@ namespace WigiDashWidgetFramework
             }
 
             LogQueue.Enqueue(log);
-            LogEvent?.Invoke(log);
+            
+            Task.Run(() =>
+            {
+                LogEvent?.Invoke(log);
+            });
         }
 
         // Initialize method to set file logFilePath and start logging
