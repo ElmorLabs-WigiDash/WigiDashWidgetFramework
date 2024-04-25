@@ -93,7 +93,7 @@ namespace WigiDashWidgetFramework.WidgetUtility
     public static class WidgetUtility
     {
 
-        public const SdkVersion CurrentSdkVersion = SdkVersion.Version_0;
+        public const SdkVersion CurrentSdkVersion = SdkVersion.Version_1;
 
         public static Color ColorTo16bit(Color color)
         {

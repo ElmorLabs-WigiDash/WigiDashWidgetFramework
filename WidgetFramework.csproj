@@ -5,11 +5,11 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>WigiDashWidgetFramework</AssemblyName>
     <RootNamespace>WigiDashWidgetFramework</RootNamespace>
-    <Version>1.0.0.0</Version>
+    <Version>1.0.0.1</Version>
     <Configurations>Debug;Release</Configurations>
-    <Copyright>Copyright © ElmorLabs 2023</Copyright>
-    <FileVersion>1.0.0.0</FileVersion>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Copyright>Copyright © ElmorLabs 2024</Copyright>
+    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
