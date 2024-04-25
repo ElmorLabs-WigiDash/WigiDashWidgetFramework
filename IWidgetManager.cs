@@ -84,7 +84,7 @@ namespace WigiDashWidgetFramework
 
         bool BindAction(IWidgetInstance widgetInstance, Guid actionGuid);
         bool UnbindAction(IWidgetInstance widgetInstance, Guid actionGuid);
-        List<Guid> GetBoundActions(IWidgetInstance widgetInstance);
+        List<Guid> GetBoundActions(IWidgetInstance widgetInstance, int setId);
 
         bool RegisterAction(IWidgetInstance widgetInstance, Guid actionGuid, string actionName);
         bool UnregisterAction(IWidgetInstance widgetInstance, Guid actionGuid);
