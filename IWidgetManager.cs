@@ -36,6 +36,9 @@ namespace WigiDashWidgetFramework
         event AidaWidgetUpdateEventHandler AidaWidgetUpdated;
         event AidaStatusUpdatedEventHandler AidaStatusUpdated;
 
+        // Logging
+        ILogger GetLogger();
+
         // Functionality
         bool StoreSetting(IWidgetInstance widgetInstance, string settingId, string settingValue, bool isCloneable = true);
         bool LoadSetting(IWidgetInstance widgetInstance, string settingId, out string settingValue);
