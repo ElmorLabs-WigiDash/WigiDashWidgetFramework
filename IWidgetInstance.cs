@@ -1,5 +1,4 @@
 using WigiDashWidgetFramework.WidgetUtility;
-using WigiDashWidgetFramework.Logging;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,8 +36,6 @@ namespace WigiDashWidgetFramework
 
     public class WidgetUpdatedEventArgs : EventArgs
     {
-        private static Logger Logger { get; } = LogManager.GetCurrentClassLogger();
-
         private readonly object BitmapLock = new();
         private Bitmap _currentBitmap;
 
@@ -57,8 +54,7 @@ namespace WigiDashWidgetFramework
                         {
                             return new Bitmap(_currentBitmap);
                         }
-                        catch (Exception ex) {
-                            Logger.Warn(ex, "Failed to clone the current widget bitmap for a WidgetBitmap read");
+                        catch {
                             return null;
                         }
                     }
@@ -84,10 +80,7 @@ namespace WigiDashWidgetFramework
 
                         if (oldBitmap != null) oldBitmap.Dispose();
                     }
-                    catch (Exception ex)
-                    {
-                        Logger.Warn(ex, "Failed to set the current widget bitmap for a WidgetBitmap write");
-                    }
+                    catch { }
                 }
             }
         }
